@@ -238,4 +238,94 @@ router.post("/reservations", function(req, res) {
 // get `/reservations/details-between/:from_day/:to_day`
 // TODO: add code here
 
+router.delete("/reservations/:id", function(req, res) {
+  const id = req.params.id;
+  const sql = `delete from reservations where id = ${id}`;
+
+  db.run(sql, (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+
+    console.log("Successfully removed reservation");
+    res.status(200).json({
+      message: "Successfully removed reservation"
+    });
+  });
+});
+////////////////////////////////////class3
+//HOMEWORK 1
+router.get("/reservations-and-invoices/", function(req, res) {
+  const sql = `select *
+  FROM reservations 
+  JOIN invoices 
+  ON invoices.reservation_id = reservations.id`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 2
+///////Calculate the total amount paid on invoices for the summer of 2018
+// SELECT SUM(total) as totalPaid FROM invoices WHERE invoices.paid = 1 AND invoice_date_time > "2017-05-01" AND invoice_date_time < "2017-08-30";
+
+//HOMEWORK 3
+router.get("/reservations-per-customer/", function(req, res) {
+  const sql = `SELECT customers.firstname, customers.surname, customers.email, COUNT(*)
+AS count
+FROM customers
+GROUP BY surname;`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 4
+/////Get the number of reservations for each room ID and include the details for the room details
+router.get("/reservation-per-room/", function(req, res) {
+  const sql = `SELECT room_types.*,room_id, COUNT(*) 
+as Counts 
+FROM rooms
+JOIN reservations
+ON reservations.room_id = rooms.id  
+JOIN room_types
+ON rooms.room_type_id = room_types.id
+GROUP BY room_id;`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 5
+///Adapt the previous query (8.c) to include the details for the type of room.
+///it's adapted
+
+///HOMEWORK 6
+///Get the list of rooms with sea view that were reserved more than 5 times.
+
 module.exports = router;
