@@ -326,6 +326,123 @@ GROUP BY room_id;`;
 ///it's adapted
 
 ///HOMEWORK 6
-///Get the list of rooms with sea view that were reserved more than 5 times.
+///Get the list of rooms with sea view that were reserved more than 2 times.
+
+router.get("/rooms-sea-view/", function(req, res) {
+  const sql = `SELECT reservations.room_id, count(*)
+ as count
+  FROM reservations
+  JOIN rooms
+  ON reservations.room_id = rooms.id
+  WHERE rooms.sea_view = 1
+  GROUP BY reservations.room_id
+ HAVING count >= 2`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 8
+/// get the list of reservations between a specified time period. this should include the customer and room details.
+
+router.get("/reservations/details-between/:from_day/:to_day", function(
+  req,
+  res
+) {
+  const fromDay = req.params.from_day;
+  const toDay = req.params.to_day;
+  const sql = `SELECT customers.*, rooms.*, reservations.id
+  FROM reservations
+  JOIN rooms
+  ON reservations.room_id = rooms.id
+  JOIN customers
+  ON reservations.customer_id = customers.id
+  WHERE check_in_date > "${fromDay}" AND check_in_date < "${toDay}"`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 9
+///As a staff member, I want to get the number of reservations per customer.
+////Create an endpoint to get from / reservations - per - customer / the number of reservations each client has
+
+router.get("/reservations-per-customer/", function(req, res) {
+  const sql = `SELECT customer_id, COUNT(*)
+  AS count
+  FROM reservations
+  GROUP BY customer_id`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 10
+////Create an endpoint to get from /stats-price-room/ the list of rooms, together with the amount the hotel has earned with each,
+/// the average value earned per stay, and the number of complete stays it has had in the past.
+
+router.get("/stats-price-room/", function(req, res) {
+  const sql = `SELECT room_id, SUM(room_price) AS total, AVG(room_price) AS average, COUNT(*) AS count
+  FROM reservations
+  GROUP BY room_id`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
+
+///HOMEWORK 11
+///Create an endpoint to get from /rooms/available-in/:from_day/:to_day the list of available rooms
+
+router.get("/rooms/available-in/:from_day/:to_day", function(req, res) {
+  const fromDay = req.params.from_day;
+  const toDay = req.params.to_day;
+  const sql = `SELECT room_id
+  FROM reservations
+  GROUP BY room_id
+  HAVING check_in_date < "${toDay}" AND check_out_date < "${fromDay}" OR check_in_date > "${toDay}"`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      console.log("ERROR fetching from the database:", err);
+      return;
+    }
+    console.log("Request succeeded, new data fetched", rows);
+    res.status(200).json({
+      reservations: rows
+    });
+  });
+});
 
 module.exports = router;

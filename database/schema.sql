@@ -197,11 +197,11 @@ foreign key(room_id) references rooms(id)
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (21, 2, "2019-01-20", "2019-01-02", 103.00);
+  (21, 2, "2019-01-20", "2019-01-29", 103.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (2, 9, "2018-09-24", "2018-08-27", 51.00);
+  (2, 9, "2018-09-24", "2018-10-27", 51.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
@@ -213,31 +213,31 @@ VALUES
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (19, 1, "2018-10-13", "2018-06-22", 169.00);
+  (19, 1, "2018-10-13", "2018-12-22", 169.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (4, 6, "2019-01-06", "2018-04-08", 59.00);
+  (4, 6, "2018-01-06", "2018-04-08", 59.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (5, 10, "2018-12-16", "2018-09-29", 182.00);
+  (5, 10, "2018-07-16", "2018-09-29", 182.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (21, 2, "2018-12-30", "2018-02-17", 184.00);
+  (21, 2, "2018-01-30", "2018-02-17", 184.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (11, 3, "2018-11-03", "2018-04-01", 185.00);
+  (11, 3, "2018-02-03", "2018-04-01", 185.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (17, 8, "2018-10-25", "2018-09-02", 167.00);
+  (17, 8, "2018-07-25", "2018-09-02", 167.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (2, 7, "2018-09-28", "2018-02-10", 68.00);
+  (2, 7, "2018-01-28", "2018-02-10", 68.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
@@ -245,7 +245,7 @@ VALUES
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (5, 5, "2018-11-16", "2018-07-13", 58.00);
+  (5, 5, "2018-05-16", "2018-07-13", 58.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
@@ -265,11 +265,11 @@ VALUES
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (18, 2, "2018-08-31", "2018-04-28", 54.00);
+  (18, 2, "2018-02-31", "2018-04-28", 54.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
-  (6, 6, "2018-12-31", "2018-12-07", 105.00);
+  (6, 6, "2018-11-31", "2018-12-07", 105.00);
 INSERT INTO reservations
   (customer_id, room_id, check_in_date, check_out_date, room_price)
 VALUES
